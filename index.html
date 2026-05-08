@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Get your free business health report. We read your M-Pesa statement and tell you exactly where your money is going. Used by Jua Kali businesses across Kenya.">
+<title>Pesa Smart — Know Your Business. Get Your Loan.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green:    #0C2A4A;
+    --green-m:  #1A4F8C;
+    --green-l:  #4A90D9;
+    --green-xl: #DAEAF7;
+    --ochre:    #C9841A;
+    --ochre-l:  #F4A825;
+    --ochre-xl: #FFF3CD;
+    --cream:    #FAF7F2;
+    --ink:      #0D1B12;
+    --ink-m:    #2C3E2F;
+    --ink-l:    #5A6B5D;
+    --white:    #FFFFFF;
+    --wa:       #1A4D2E;
+    --wa-dark:  #4A90D9;
+    --red:      #C0392B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ──────────────────────────────────────────────────── */
+  .hero {
+    background: var(--green);
+    color: var(--white);
+    padding: 56px 24px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--green-m);
+    opacity: 0.4;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--green-m);
+    opacity: 0.25;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+
+  .badge {
+    display: inline-block;
+    background: var(--ochre);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(36px, 8vw, 58px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--ochre-l);
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 4vw, 19px);
+    line-height: 1.6;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+
+  /* ── CTA BUTTON ────────────────────────────────────────────── */
+  .wa-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--wa);
+    color: var(--white);
+    text-decoration: none;
+    padding: 18px 28px;
+    border-radius: 16px;
+    font-size: 17px;
+    font-weight: 600;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.15s, background 0.15s;
+    box-shadow: 0 4px 24px rgba(26,77,46,0.45);
+  }
+  .wa-btn:hover { background: var(--wa-dark); transform: translateY(-2px); box-shadow: 0 4px 24px rgba(74,144,217,0.45); }
+  .wa-btn:active { transform: translateY(0); }
+  .wa-icon {
+    width: 28px; height: 28px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .wa-icon svg { width: 16px; height: 16px; fill: white; }
+  .wa-btn-text { flex: 1; }
+  .wa-btn-text strong { display: block; font-size: 17px; }
+  .wa-btn-text span { font-size: 12px; opacity: 0.85; font-weight: 400; }
+  .wa-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #F4A825;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .wa-note::before {
+    content: '🔒';
+    font-size: 11px;
+  }
+
+  /* ── INVISIBLE TAX SECTION ─────────────────────────────────── */
+  .tax-section {
+    background: var(--ochre-xl);
+    border-top: 3px solid var(--ochre);
+    padding: 48px 24px;
+  }
+  .section-inner { max-width: 600px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(26px, 6vw, 38px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .body-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-m);
+    margin-bottom: 24px;
+  }
+
+  .tax-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .tax-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 16px;
+    border-left: 4px solid var(--ochre);
+  }
+  .tax-card .amount {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .tax-card .label {
+    font-size: 12px;
+    color: var(--ink-l);
+    line-height: 1.4;
+  }
+
+  /* ── HOW IT WORKS ──────────────────────────────────────────── */
+  .how-section {
+    padding: 56px 24px;
+    background: var(--white);
+  }
+  .steps { margin-top: 32px; display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: 0;
+    width: 2px;
+    background: var(--green-xl);
+  }
+  .step-num {
+    width: 40px; height: 40px;
+    background: var(--green);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 18px;
+    font-weight: 900;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-content h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .step-content p {
+    font-size: 15px;
+    color: var(--ink-m);
+    line-height: 1.6;
+  }
+  .step-tag {
+    display: inline-block;
+    background: var(--green-xl);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 8px;
+  }
+
+  /* ── CASE STUDIES ──────────────────────────────────────────── */
+  .cases-section {
+    padding: 56px 24px;
+    background: var(--cream);
+  }
+  .case-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .case-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .case-header {
+    background: var(--green);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .case-header .biz-name {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .case-header .biz-type {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+  .rating-pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .rating-healthy { background: #DAEAF7; color: #0C2A4A; }
+  .rating-breakeven { background: #FFF3CD; color: #7D5200; }
+
+  .case-body { padding: 20px; }
+  .metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .metric { }
+  .metric .val {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .metric .val.danger { color: var(--red); }
+  .metric .val.good { color: var(--green-m); }
+  .metric .mlab {
+    font-size: 11px;
+    color: var(--ink-l);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .case-finding {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--ink-m);
+    line-height: 1.5;
+    border-left: 3px solid var(--ochre);
+  }
+  .case-finding strong { color: var(--ink); font-weight: 600; }
+
+  /* ── OFFER SECTION ─────────────────────────────────────────── */
+  .offer-section {
+    padding: 56px 24px;
+    background: var(--green);
+    color: white;
+  }
+  .offer-section .section-label { color: var(--ochre-l); }
+  .offer-section h2 { color: white; }
+  .offer-section .body-text { color: rgba(255,255,255,0.75); }
+
+  .offer-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .offer-card {
+    border-radius: 14px;
+    padding: 20px 16px;
+  }
+  .offer-free {
+    background: var(--green-m);
+    border: 1px solid var(--green-l);
+  }
+  .offer-paid {
+    background: var(--ochre);
+    position: relative;
+  }
+  .offer-card .price {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .offer-free .price { color: var(--green-l); }
+  .offer-paid .price { color: white; }
+  .offer-card h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .offer-free h3 { color: white; }
+  .offer-paid h3 { color: white; }
+  .offer-card ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .offer-free ul { color: rgba(255,255,255,0.8); }
+  .offer-paid ul { color: rgba(255,255,255,0.9); }
+  .offer-card ul li::before {
+    content: '✓ ';
+    font-weight: 700;
+  }
+  .offer-free ul li::before { color: var(--green-l); }
+  .offer-paid ul li::before { color: white; }
+
+  /* ── HOW TO GET YOUR STATEMENT ─────────────────────────────── */
+  .statement-section {
+    padding: 56px 24px;
+    background: var(--cream);
+  }
+  .statement-box {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.07);
+    overflow: hidden;
+    margin-top: 28px;
+  }
+  .statement-box-header {
+    background: var(--ink);
+    color: white;
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+  .statement-steps { padding: 20px; }
+  .s-step {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--cream);
+    align-items: flex-start;
+  }
+  .s-step:last-child { border-bottom: none; }
+  .s-num {
+    width: 26px; height: 26px;
+    background: var(--green-xl);
+    color: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .s-step p { font-size: 14px; color: var(--ink-m); line-height: 1.5; }
+  .s-step strong { color: var(--ink); }
+  .password-note {
+    background: var(--ochre-xl);
+    border: 1px solid var(--ochre);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--ink-m);
+    line-height: 1.6;
+  }
+  .password-note strong { color: var(--ochre); }
+
+  /* ── FINAL CTA ─────────────────────────────────────────────── */
+  .final-cta {
+    padding: 64px 24px;
+    background: var(--ink);
+    color: white;
+    text-align: center;
+  }
+  .final-cta h2 { color: white; margin: 0 auto 16px; max-width: 420px; }
+  .final-cta .body-text {
+    color: rgba(255,255,255,0.65);
+    max-width: 380px;
+    margin: 0 auto 36px;
+  }
+  .final-cta .wa-btn {
+    margin: 0 auto;
+    box-shadow: 0 4px 32px rgba(26,77,46,0.45);
+  }
+  .spots-left {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+  }
+  .spots-left span {
+    color: var(--ochre-l);
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ────────────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── UTILITIES ─────────────────────────────────────────────── */
+  .divider {
+    width: 48px; height: 3px;
+    background: var(--ochre);
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .green-divider { background: var(--green-l); }
+
+  @media (max-width: 400px) {
+    .offer-cards { grid-template-columns: 1fr; }
+    .tax-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── ANIMATIONS ────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero-inner > *:nth-child(5) { animation-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge">Jua Kali · Free for the first 20 businesses</div>
+    <h1>Your business is not failing.<br>It is <em>leaking.</em></h1>
+    <p class="hero-sub">
+      We read your M-Pesa statement and show you exactly where your money
+      is going — then give you the financial report a bank needs to give you a loan.
+    </p>
+    <a href="https://wa.me/254XXXXXXXXX?text=I%20want%20my%20Bankability%20Report" class="wa-btn" id="wa-main">
+      <div class="wa-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </div>
+      <div class="wa-btn-text">
+        <strong>Get My Free Report on WhatsApp</strong>
+        <span>Tap to open WhatsApp → send your statement</span>
+      </div>
+    </a>
+    <p class="wa-note">100% confidential. Your PDF is deleted after processing.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ INVISIBLE TAX -->
+<section class="tax-section">
+  <div class="section-inner">
+    <p class="section-label">The Problem</p>
+    <div class="divider"></div>
+    <h2>The Invisible Tax killing your business</h2>
+    <p class="body-text">
+      Every month, your business pays a tax you never agreed to. Not to KRA.
+      To M-Pesa fees, untracked withdrawals, and customers paying on Fuliza.
+      Most business owners have no idea how much they are losing.
+    </p>
+    <div class="tax-grid">
+      <div class="tax-card">
+        <div class="amount">KES 6,379</div>
+        <div class="label">Lost per month by a food kibanda earning KES 124K</div>
+      </div>
+      <div class="tax-card">
+        <div class="amount">KES 14,532</div>
+        <div class="label">Lost per month by a grocer earning KES 495K</div>
+      </div>
+      <div class="tax-card">
+        <div class="amount">27.5%</div>
+        <div class="label">Of kibanda revenue came from Fuliza — at risk if Safaricom changes limits</div>
+      </div>
+      <div class="tax-card">
+        <div class="amount">KES 0</div>
+        <div class="label">What most MSME owners know about their real profit margin</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-inner">
+    <p class="section-label">How It Works</p>
+    <div class="divider"></div>
+    <h2>Three steps. No accountant needed.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Download your M-Pesa statement</h3>
+          <p>Open your M-Pesa app → Statements → Last 6 months. It downloads as a PDF with a password Safaricom sends you by SMS. Takes 2 minutes.</p>
+          <span class="step-tag">M-Pesa app → My Account → Statements</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Forward it on WhatsApp</h3>
+          <p>Tap the button on this page. It opens a WhatsApp chat with us. Forward your PDF and type your password in the next message. That is it.</p>
+          <span class="step-tag">Takes less than 60 seconds</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Get your report</h3>
+          <p>We process your data and send you back a report showing your revenue, your real profit, where your money is leaking, and your bankability score — the number banks use to decide if you qualify for a loan.</p>
+          <span class="step-tag">Free teaser in 24 hours · Full report KES 1,000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CASE STUDIES -->
+<section class="cases-section">
+  <div class="section-inner">
+    <p class="section-label">Real Results</p>
+    <div class="divider"></div>
+    <h2>From our first three businesses</h2>
+    <p class="body-text">These are real M-Pesa statements from real Kenyan businesses. All names are anonymised.</p>
+
+    <div class="case-cards">
+
+      <!-- BIZ001 -->
+      <div class="case-card">
+        <div class="case-header">
+          <div>
+            <div class="biz-name">Food Kibanda</div>
+            <div class="biz-type">Food Trading · Nairobi</div>
+          </div>
+          <span class="rating-pill rating-breakeven">⚠ Break-Even</span>
+        </div>
+        <div class="case-body">
+          <div class="metrics">
+            <div class="metric">
+              <div class="val">KES 124K</div>
+              <div class="mlab">6-month revenue</div>
+            </div>
+            <div class="metric">
+              <div class="val good">71.4%</div>
+              <div class="mlab">Gross profit margin</div>
+            </div>
+            <div class="metric">
+              <div class="val danger">2.0%</div>
+              <div class="mlab">Net margin</div>
+            </div>
+            <div class="metric">
+              <div class="val danger">CRITICAL</div>
+              <div class="mlab">Fuliza risk rating</div>
+            </div>
+          </div>
+          <div class="case-finding">
+            <strong>What we found:</strong> The business has a strong 71% gross margin — but the owner was taking KES 38,027 informally through M2C transfers instead of using the Settle Funds feature. This made the net margin collapse to 2% and made the business look undisciplined to lenders. Fix: one habit change.
+          </div>
+        </div>
+      </div>
+
+      <!-- BIZ002 -->
+      <div class="case-card">
+        <div class="case-header">
+          <div>
+            <div class="biz-name">Kiosk & Grocer</div>
+            <div class="biz-type">Food Trading · Nairobi</div>
+          </div>
+          <span class="rating-pill rating-healthy">✅ Healthy</span>
+        </div>
+        <div class="case-body">
+          <div class="metrics">
+            <div class="metric">
+              <div class="val">KES 495K</div>
+              <div class="mlab">6-month revenue</div>
+            </div>
+            <div class="metric">
+              <div class="val good">73.8%</div>
+              <div class="mlab">Gross profit margin</div>
+            </div>
+            <div class="metric">
+              <div class="val good">4×</div>
+              <div class="mlab">Revenue growth Nov→Apr</div>
+            </div>
+            <div class="metric">
+              <div class="val danger">HIGH</div>
+              <div class="mlab">Fuliza risk rating</div>
+            </div>
+          </div>
+          <div class="case-finding">
+            <strong>What we found:</strong> A well-run business growing fast — revenue went from KES 9,135 in November to KES 125,290 in April. But KES 39,931 in unexplained customer refunds (8.1% of revenue) was the hidden drain. The owner did not know this until we showed them the data.
+          </div>
+        </div>
+      </div>
+
+      <!-- BIZ003 -->
+      <div class="case-card">
+        <div class="case-header">
+          <div>
+            <div class="biz-name">Quarry Operator</div>
+            <div class="biz-type">Quarry · Kenya</div>
+          </div>
+          <span class="rating-pill rating-breakeven">⚠ Break-Even</span>
+        </div>
+        <div class="case-body">
+          <div class="metrics">
+            <div class="metric">
+              <div class="val">KES 28.8M</div>
+              <div class="mlab">8-month revenue</div>
+            </div>
+            <div class="metric">
+              <div class="val good">LOW</div>
+              <div class="mlab">Fuliza risk rating</div>
+            </div>
+            <div class="metric">
+              <div class="val danger">Personal</div>
+              <div class="mlab">M-Pesa account used</div>
+            </div>
+            <div class="metric">
+              <div class="val good">KCB</div>
+              <div class="mlab">Existing bank relationship</div>
+            </div>
+          </div>
+          <div class="case-finding">
+            <strong>What we found:</strong> KES 28.8 million flowing through a personal M-Pesa account — not a business account. KES 4.07M in cash withdrawals were counted as costs, making profit appear negative. True gross margin: 13.8%. One structural change — opening a business account — would transform this owner's bankability overnight.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ OFFERS -->
+<section class="offer-section">
+  <div class="section-inner">
+    <p class="section-label">What You Get</p>
+    <div class="divider green-divider"></div>
+    <h2>Start free. Unlock when you are ready.</h2>
+    <p class="body-text">
+      We do not charge you to find out if your business is leaking.
+      The full bankability report — the one you take to a lender — costs KES 1,000.
+    </p>
+    <div class="offer-cards">
+      <div class="offer-card offer-free">
+        <div class="price">FREE</div>
+        <h3>Leakage Teaser</h3>
+        <ul>
+          <li>Last 30 days analysed</li>
+          <li>KES leakage amount</li>
+          <li>Top 2 leak sources</li>
+          <li>WhatsApp text reply</li>
+        </ul>
+      </div>
+      <div class="offer-card offer-paid">
+        <div class="price">KES 1,000</div>
+        <h3>Full Bankability Report</h3>
+        <ul>
+          <li>6 months analysed</li>
+          <li>Formal P&amp;L statement</li>
+          <li>Health score (1–5)</li>
+          <li>Bankability rating</li>
+          <li>Cost reduction plan</li>
+          <li>Excel report via WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ GET YOUR STATEMENT -->
+<section class="statement-section">
+  <div class="section-inner">
+    <p class="section-label">Before You Send</p>
+    <div class="divider"></div>
+    <h2>How to get your M-Pesa statement</h2>
+    <p class="body-text">Takes 2 minutes. You do this from your phone right now.</p>
+    <div class="statement-box">
+      <div class="statement-box-header">Step-by-step: M-Pesa Merchant Statement</div>
+      <div class="statement-steps">
+        <div class="s-step">
+          <div class="s-num">1</div>
+          <p>Open <strong>M-Pesa app</strong> on your phone → tap <strong>My Account</strong></p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">2</div>
+          <p>Tap <strong>Statements</strong> → select <strong>Merchant Statement</strong></p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">3</div>
+          <p>Choose <strong>last 6 months</strong> as the period → tap <strong>Send Statement</strong></p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">4</div>
+          <p>Safaricom will send the PDF to your email <strong>and an SMS with the password</strong> to open it</p>
+        </div>
+        <div class="s-step">
+          <div class="s-num">5</div>
+          <p>Forward the PDF here on WhatsApp. In your <strong>very next message</strong>, type the password.</p>
+        </div>
+      </div>
+    </div>
+    <div class="password-note">
+      <strong>Why we need the password:</strong> M-Pesa statements are locked for your security.
+      We use the password to open and read your data, then delete both the PDF and the password immediately.
+      We only keep the structured financial data — never the original file.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ FINAL CTA -->
+<section class="final-cta">
+  <div class="section-inner">
+    <p class="section-label" style="color: var(--ochre-l); text-align:center; margin-bottom:16px;">Ready?</p>
+    <h2>Find out what your business is really worth — in 24 hours.</h2>
+    <p class="body-text">
+      No accountant. No bank visits. No complicated forms.
+      Just your M-Pesa statement and 60 seconds on WhatsApp.
+    </p>
+    <a href="https://wa.me/254XXXXXXXXX?text=I%20want%20my%20Bankability%20Report" class="wa-btn">
+      <div class="wa-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </div>
+      <div class="wa-btn-text">
+        <strong>Get My Free Report on WhatsApp</strong>
+        <span>Tap to open WhatsApp → send your statement</span>
+      </div>
+    </a>
+    <p class="spots-left">Only <span>20 free slots</span> available in this pilot. First come, first served.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Pesa Smart · Making Jua Kali Bankable · Kenya</p>
+  <p style="margin-top:6px;">Your data is processed confidentially and never shared. PDFs are deleted after processing.</p>
+</footer>
+
+</body>
+</html>
